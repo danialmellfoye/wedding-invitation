@@ -597,9 +597,71 @@
 <div id="music-control" onclick="toggleMusic()">
   <span id="music-icon">♪</span>
 </div>
-<audio id="bg-music" loop>
-  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-</audio>
+<audio id="bg-music" loop></audio>
+
+<!-- <div id="music-btn" onclick="toggleMusic()" title="Toggle Music"
+  style="position:fixed;bottom:24px;left:24px;z-index:9999;
+  width:48px;height:48px;border-radius:50%;
+  background:#5C1A2E;border:2px solid #B8924A;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.4rem;cursor:pointer;
+  box-shadow:0 4px 20px rgba(92,26,46,0.4);">♪</div> -->
+
+<script>
+  const music = document.getElementById('bg-music');
+  const btn   = document.getElementById('music-btn');
+
+  const playlist = [
+    'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
+    'https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/Sound2.mp3',
+    'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
+    'https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/Sound4.mp3',
+    'https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/Sound5.mp3',
+  ];
+
+  let trackIndex = 0;   // which song (0–4)
+  let playing    = false;
+
+  function loadTrack(index) {
+    music.src = playlist[index];
+    music.load();
+  }
+
+  function toggleMusic() {
+    const audio = document.getElementById('bg-music');
+    const icon = document.getElementById('music-icon');
+    if (!playing) {
+      // Load current track and play
+      loadTrack(trackIndex);
+      audio.play();
+      // btn.textContent = '🎵';
+      icon.innerHTML = '||';
+      playing = true;
+    } else {
+      // Stop → advance to next track (reset after 5)
+      audio.pause();
+      audio.currentTime = 0;
+      // btn.textContent = '🔇';
+      icon.innerHTML = '♪';
+      playing = false;
+
+      trackIndex = (trackIndex + 1) % playlist.length; // 0→1→2→3→4→0
+    }
+  }
+
+    // // ── MUSIC TOGGLE ──
+  // function toggleMusic() {
+  //   const audio = document.getElementById('bg-music');
+  //   const icon = document.getElementById('music-icon');
+  //   if (audio.paused) {
+  //     audio.play();
+  //     icon.innerHTML = '||';
+  //   } else {
+  //     audio.pause();
+  //     icon.innerHTML = '♪';
+  //   }
+  // }
+</script>
 
 <!-- HERO -->
 <section class="hero">
@@ -802,18 +864,18 @@
     }
   }
 
-  // ── MUSIC TOGGLE ──
-  function toggleMusic() {
-    const audio = document.getElementById('bg-music');
-    const icon = document.getElementById('music-icon');
-    if (audio.paused) {
-      audio.play();
-      icon.innerHTML = '||';
-    } else {
-      audio.pause();
-      icon.innerHTML = '♪';
-    }
-  }
+  // // ── MUSIC TOGGLE ──
+  // function toggleMusic() {
+  //   const audio = document.getElementById('bg-music');
+  //   const icon = document.getElementById('music-icon');
+  //   if (audio.paused) {
+  //     audio.play();
+  //     icon.innerHTML = '||';
+  //   } else {
+  //     audio.pause();
+  //     icon.innerHTML = '♪';
+  //   }
+  // }
   
   // ── FALLING PETALS ──
   const canvas = document.getElementById('petals-canvas');
