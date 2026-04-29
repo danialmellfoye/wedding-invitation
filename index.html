@@ -301,6 +301,37 @@
     .countdown-section .section-title { color: var(--gold-light); }
     .countdown-section .section-label { color: rgba(212,175,113,0.7); }
 
+    /* ── CLICK SPARKLES ── */
+    .sparkle {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold-light);
+      pointer-events: none;
+      z-index: 9999;
+      box-shadow: 0 0 10px var(--gold);
+    }
+
+    /* ── MUSIC PLAYER ── */
+    #music-control {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1000;
+      background: var(--burgundy);
+      color: var(--gold-light);
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      border: 1px solid var(--gold);
+    }
+
     /* ── VENUE CARD ── */
     .venue-section { background: var(--ivory); }
 
@@ -559,9 +590,16 @@
     }
   </style>
 </head>
-<body>
+<body onclick="createBurst(event)">
 
 <canvas id="petals-canvas"></canvas>
+
+<div id="music-control" onclick="toggleMusic()">
+  <span id="music-icon">♪</span>
+</div>
+<audio id="bg-music" loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
 
 <!-- HERO -->
 <section class="hero">
@@ -734,6 +772,49 @@
 </footer>
 
 <script>
+  // ── CLICK SPARKLES ──
+  function createBurst(e) {
+    for (let i = 0; i < 12; i++) {
+      const sparkle = document.createElement('div');
+      sparkle.className = 'sparkle';
+      document.body.appendChild(sparkle);
+      
+      const size = Math.random() * 8 + 4;
+      sparkle.style.width = `${size}px`;
+      sparkle.style.height = `${size}px`;
+      
+      const destinationX = e.pageX + (Math.random() - 0.5) * 200;
+      const destinationY = e.pageY + (Math.random() - 0.5) * 200;
+
+      sparkle.style.left = `${e.pageX}px`;
+      sparkle.style.top = `${e.pageY}px`;
+
+      const animation = sparkle.animate([
+        { transform: 'translate(0, 0) scale(1)', opacity: 1 },
+        { transform: `translate(${destinationX - e.pageX}px, ${destinationY - e.pageY}px) scale(0)`, opacity: 0 }
+      ], {
+        duration: 1000 + Math.random() * 1000,
+        easing: 'cubic-bezier(0, .9, .57, 1)',
+        fill: 'forwards'
+      });
+
+      animation.onfinish = () => sparkle.remove();
+    }
+  }
+
+  // ── MUSIC TOGGLE ──
+  function toggleMusic() {
+    const audio = document.getElementById('bg-music');
+    const icon = document.getElementById('music-icon');
+    if (audio.paused) {
+      audio.play();
+      icon.innerHTML = '||';
+    } else {
+      audio.pause();
+      icon.innerHTML = '♪';
+    }
+  }
+  
   // ── FALLING PETALS ──
   const canvas = document.getElementById('petals-canvas');
   const ctx = canvas.getContext('2d');
