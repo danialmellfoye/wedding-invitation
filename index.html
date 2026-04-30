@@ -579,14 +579,162 @@
       100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
     }
 
+    /* ── MAP ── */
+    .map-wrap {
+      margin-top: 18px;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(92,26,46,0.12);
+      border: 1px solid rgba(184,146,74,0.2);
+      aspect-ratio: 4 / 3;
+      width: 100%;
+      max-width: 100%;
+      background: #fff;
+    }
+
+    .map-wrap iframe {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 640px) {
+      .hero {
+        min-height: 92vh;
+        padding: 44px 16px 70px;
+      }
+
+      .hero-ornament {
+        font-size: 0.85rem;
+        letter-spacing: 0.28em;
+      }
+
+      .cross {
+        font-size: 2.2rem;
+      }
+
+      .hero-subtitle {
+        font-size: 1rem;
+        margin-bottom: 22px;
+      }
+
+      .couple-names {
+        gap: 10px;
+      }
+
+      .groom-name, .bride-name {
+        font-size: clamp(2.2rem, 13vw, 3.4rem);
+      }
+
+      .ampersand {
+        font-size: clamp(2.4rem, 12vw, 3.5rem);
+      }
+
+      .hero-date-badge {
+        padding: 12px 22px;
+        font-size: 0.78rem;
+        letter-spacing: 0.16em;
+      }
+
+      section {
+        padding: 64px 16px;
+      }
+
+      .section-inner {
+        max-width: 100%;
+      }
+
+      .countdown-grid {
+        gap: 12px;
+      }
+
+      .count-box {
+        min-width: 64px;
+      }
+
+      .count-sep {
+        display: none;
+      }
+
+      .count-num {
+        font-size: clamp(2.3rem, 14vw, 3.2rem);
+      }
+
+      .venue-card {
+        padding: 28px 18px;
+        margin-top: 28px;
+      }
+
+      .venue-name {
+        font-size: 1.7rem;
+      }
+
+      .venue-detail {
+        font-size: 1rem;
+      }
+
+      .venue-time-row {
+        gap: 14px;
+        padding: 16px 0;
+      }
+
+      .time-item {
+        flex: 1 1 100px;
+      }
+
+      .time-val {
+        font-size: 1.25rem;
+      }
+
+      .bus-info {
+        padding: 14px 16px;
+        font-size: 0.9rem;
+      }
+
+      .map-wrap {
+        aspect-ratio: 1 / 1;
+      }
+
       .families-grid {
         grid-template-columns: 1fr;
+        gap: 18px;
       }
-      .family-sep { flex-direction: row; padding-top: 0; }
-      .family-sep .big-amp { font-size: 2.5rem; }
-      .venue-time-row { gap: 24px; }
+
+      .family-sep {
+        flex-direction: row;
+        padding-top: 0;
+      }
+
+      .family-sep .big-amp {
+        font-size: 2.5rem;
+      }
+
+      .family-card {
+        padding: 26px 18px;
+      }
+
+      .family-main-name {
+        font-size: 1.4rem;
+      }
+
+      .contact-row {
+        gap: 14px;
+      }
+
+      .contact-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 14px 18px;
+      }
+
+      #music-control {
+        right: 14px;
+        bottom: 14px;
+        width: 42px;
+        height: 42px;
+      }
     }
   </style>
 </head>
@@ -760,7 +908,15 @@
         🚌 &nbsp;<strong>Bus Route:</strong> Periyar → Thirupuvanam &nbsp;|&nbsp; Route Nos. <strong>32 &amp; 99</strong><br>
         🛑 &nbsp;<strong>Stop:</strong> Velammal School
       </div><br>
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1965.6176153977035!2d78.2487702156211!3d9.830600402749905!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b00dda8eaaaaaab%3A0xaa46b07c7309d4b!2sTR%20Mahal!5e0!3m2!1sen!2sin!4v1777528324824!5m2!1sen!2sin" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <div class="map-wrap">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1965.6176153977035!2d78.2487702156211!3d9.830600402749905!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b00dda8eaaaaaab%3A0xaa46b07c7309d4b!2sTR%20Mahal!5e0!3m2!1sen!2sin!4v1777528324824!5m2!1sen!2sin"
+          loading="lazy"
+          allowfullscreen=""
+          referrerpolicy="no-referrer-when-downgrade"
+          title="TR Mahal location map"></iframe>
+      </div>
+
     </div>
   </div>
 </section>
